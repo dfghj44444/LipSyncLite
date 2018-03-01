@@ -7,13 +7,13 @@ public class MouthAnimator : MonoBehaviour {
 
 
     Animator _ani;
-    float playProtect = 0.1f;
+    float playProtect = 0.15f;
     float played = 0;
     string lastWord = "";
 	// Use this for initialization
 	void Start () {
         _ani = gameObject.GetComponent<Animator>();
-        _ani.Play("o");
+       
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,9 @@ public class MouthAnimator : MonoBehaviour {
     public void Play(string voice)
     {
         if (voice == null || played<playProtect)
-            return; 
+            return;
+        if (lastWord.Equals(voice))
+            return;
         if (voice.Equals("a") || voice.Equals("o") || voice.Equals("e") || voice.Equals("i") || voice.Equals("u") || voice.Equals("v"))
         {
 
@@ -32,6 +34,7 @@ public class MouthAnimator : MonoBehaviour {
             //_ani.Play(voice);
             Debug.Log(voice);
             played = 0f;
+            lastWord = voice;
         }
     }
 }
