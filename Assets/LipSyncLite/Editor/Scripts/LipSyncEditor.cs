@@ -69,6 +69,12 @@ namespace LipSyncLite
                         }
                         EditorGUILayout.EndVertical();
                     }
+                    else if (targetLipSync.targetType == ETargetType.BoneAni)
+                    {
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("targetMouth"));
+                        
+                    }
+
                     EditorGUILayout.Space();
 
                     isAdvancedOptionsFoldOut = EditorGUILayout.Foldout(isAdvancedOptionsFoldOut, "Advanced Options");

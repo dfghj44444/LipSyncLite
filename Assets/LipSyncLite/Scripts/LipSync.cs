@@ -19,6 +19,7 @@ namespace LipSyncLite
         public ETargetType targetType;
         #region Fields for BlendShape
         public SkinnedMeshRenderer targetBlendShapeObject;
+        public MouthAnimator targetMouth;
         public string[] propertyNames = new string[MAX_BLEND_VALUE_COUNT];
         public float propertyMinValue = 0.0f;
         public float propertyMaxValue = 100.0f;
@@ -36,14 +37,20 @@ namespace LipSyncLite
         public float moveTowardsSpeed = 8;
 
         private LipSyncRuntimeRecognizer runtimeRecognizer;
+        #region Fields for BlendShaps
         private string[] currentVowels;
         private Dictionary<string, int> vowelToIndexDict = new Dictionary<string, int>();
-        private int[] propertyIndexs = new int[MAX_BLEND_VALUE_COUNT];
+        private int[] propertyIndexs = new int[MAX_BLEND_VALUE_COUNT];//blend shape 的名字对应index
         private float blendValuesSum;
 
-        private string recognizeResult;
         private float[] targetBlendValues = new float[MAX_BLEND_VALUE_COUNT];
         private float[] currentBlendValues = new float[MAX_BLEND_VALUE_COUNT];
+        #endregion
+
+
+
+        private string recognizeResult;
+
         #region Fields for Live2D
         private float currentPropertyXValue;
         private float currentPropertyYValue;
@@ -99,7 +106,7 @@ namespace LipSyncLite
                 {
                     targetBlendValues[i] = 0.0f;
                 }
-                currentPropertyXValue = 0;
+                currentPropertyXValue = 0;//only for live2D
                 currentPropertyYValue = 0;
 
                 if (recognizeResult != null)
@@ -132,7 +139,13 @@ namespace LipSyncLite
                             currentPropertyXValue += Mathf.Lerp(0, paramMaxValues[k].x, currentBlendValues[k]);
                             currentPropertyYValue += Mathf.Lerp(0, paramMaxValues[k].y, currentBlendValues[k]);
                         }
+                        else if (targetType == ETargetType.BoneAni)
+                        {
+                            targetMouth.Play(recognizeResult);
+                            return;//直接退出来
+                        }
                     }
+                    
                 }
                 if (targetType == ETargetType.Live2D)
                 {
@@ -142,9 +155,12 @@ namespace LipSyncLite
                     targetLive2DHelper.SetParamFloat(
                         paramYName,
                         currentPropertyYValue);
+                 
                 }
+                return;
             }
-            else if (lipSyncMethod == ELipSyncMethod.Baked)
+
+            if (lipSyncMethod == ELipSyncMethod.Baked)
             {
                 if (audioSource.timeSamples < lastTimeSamples)
                 {
@@ -175,6 +191,7 @@ namespace LipSyncLite
     public enum ETargetType
     {
         BlendShape,
-        Live2D
+        Live2D,
+        BoneAni
     }
 }

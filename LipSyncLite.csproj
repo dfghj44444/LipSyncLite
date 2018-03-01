@@ -292,6 +292,7 @@
     <Compile Include="Assets\LipSyncLite\Scripts\LipSync.cs" />
     <Compile Include="Assets\LipSyncLite\Scripts\Utility\LipSyncLive2DHelper.cs" />
     <Compile Include="Assets\LipSyncLite\Scripts\Utility\LipSyncSwitcher.cs" />
+    <Compile Include="Assets\MouthAnimator.cs" />
     <Compile Include="Assets\UnityChan\Scripts\AutoBlink.cs" />
     <Compile Include="Assets\UnityChan\Scripts\RandomWind.cs" />
     <Compile Include="Assets\UnityChan\Scripts\SpringBone.cs" />
