@@ -122,6 +122,11 @@ namespace LipSyncLite
 
                 for (int k = 0; k < currentBlendValues.Length; ++k)
                 {
+                    if (targetType == ETargetType.BoneAni)
+                    {
+                            targetMouth.Play(recognizeResult);
+                            return;//直接退出来
+                     }
                     if (propertyIndexs[k] != -1)
                     {
                         currentBlendValues[k] = Mathf.MoveTowards(
@@ -139,12 +144,9 @@ namespace LipSyncLite
                             currentPropertyXValue += Mathf.Lerp(0, paramMaxValues[k].x, currentBlendValues[k]);
                             currentPropertyYValue += Mathf.Lerp(0, paramMaxValues[k].y, currentBlendValues[k]);
                         }
-                        else if (targetType == ETargetType.BoneAni)
-                        {
-                            targetMouth.Play(recognizeResult);
-                            return;//直接退出来
-                        }
+     
                     }
+                    
                     
                 }
                 if (targetType == ETargetType.Live2D)
