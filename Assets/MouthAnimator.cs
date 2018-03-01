@@ -28,8 +28,8 @@ public class MouthAnimator : MonoBehaviour {
         if (voice.Equals("a") || voice.Equals("o") || voice.Equals("e") || voice.Equals("i") || voice.Equals("u") || voice.Equals("v"))
         {
 
-            //_ani.CrossFade(voice,0.08f);
-            _ani.Play(voice);
+            _ani.CrossFade(voice,0.08f);
+            //_ani.Play(voice);
             Debug.Log(voice);
             played = 0f;
         }
