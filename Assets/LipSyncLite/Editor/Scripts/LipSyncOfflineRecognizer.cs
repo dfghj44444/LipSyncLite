@@ -32,7 +32,7 @@ namespace LipSyncLite
         private string[] vowelsByFormantJP = { "i", "u", "e", "o", "a" };
         private float[] vowelFormantFloorJP = { 0.0f, 250.0f, 300.0f, 450.0f, 600.0f };
         private string[] vowelsByFormantCN = { "i", "v", "u", "e", "o", "a" };
-        private float[] vowelFormantFloorCN = { 0.0f, 100.0f, 250.0f, 300.0f, 450.0f, 600.0f };
+        private float[] vowelFormantFloorCN = { 0.0f, 100.0f, 250.0f, 300.0f, 450.0f, 650.0f };
 
         public LipSyncOfflineRecognizer(ERecognizerLanguage recognizingLanguage, float amplitudeThreshold, int windowSize, int shiftStepSize)
         {

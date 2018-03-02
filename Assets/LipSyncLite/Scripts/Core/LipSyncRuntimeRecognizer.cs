@@ -7,7 +7,7 @@ namespace LipSyncLite
     {
         private const int FILTER_SIZE = 7;
         private const float FILTER_DEVIATION_SQUARE = 5.0f;
-        private const int FORMANT_COUNT = 1;
+        private const int FORMANT_COUNT = 2;
 
         private ERecognizerLanguage recognizingLanguage;
 
@@ -31,8 +31,8 @@ namespace LipSyncLite
         // TODO: Data-lization
         private string[] vowelsByFormantJP = { "i", "u", "e", "o", "a" };
         private float[] vowelFormantFloorJP = { 0.0f, 250.0f, 300.0f, 450.0f, 600.0f };
-        private string[] vowelsByFormantCN = { "i", "v", "u", "e", "o", "a" };
-        private float[] vowelFormantFloorCN = { 0.0f, 100.0f, 250.0f, 300.0f, 450.0f, 600.0f };
+        private string[] vowelsByFormantCN = { "u", "v", "a", "e", "i", "o" };
+        private float[] vowelFormantFloorCN = { 350.0f, 450.0f, 550, 650.0f, 750.0f, 900.0f };
 
         public LipSyncRuntimeRecognizer(ERecognizerLanguage recognizingLanguage, int windowSize, float amplitudeThreshold)
         {
@@ -89,9 +89,10 @@ namespace LipSyncLite
                     }
                     for (int i = 0; i < currentVowelFormantCeilValues.Length; ++i)
                     {
-                        if (formantArray[0] > currentVowelFormantCeilValues[i])
+                        if (Average(formantArray)> currentVowelFormantCeilValues[i])
                         {
                             result = currentVowels[i];
+                            //Debug.Log(Average(formantArray));
                         }
                     }
                 }
@@ -107,8 +108,15 @@ namespace LipSyncLite
 
             return result;
         }
-
+     public float Average(float[] arr)
+        {
+            float sum = 0;
+            for (int i = 0; i < FORMANT_COUNT; i++)
+                sum += arr[i];
+            return sum/(float)FORMANT_COUNT;
+        }
     }
+   
 
     public enum ERecognizerLanguage
     {
