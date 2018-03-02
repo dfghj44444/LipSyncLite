@@ -7,7 +7,7 @@ public class MouthAnimator : MonoBehaviour {
 
 
     Animator _ani;
-    float playProtect = 0.2f;
+    float playProtect = 0.3f;
     float played = 0;
     string lastWord = "";
 	// Use this for initialization
@@ -30,7 +30,7 @@ public class MouthAnimator : MonoBehaviour {
         if (voice.Equals("a") || voice.Equals("o") || voice.Equals("e") || voice.Equals("i") || voice.Equals("u") || voice.Equals("v"))
         {
 
-            _ani.CrossFade(voice,0.1f);
+            _ani.CrossFade(voice,0.15f);
             //_ani.Play(voice);
             Debug.Log(voice);
             played = 0f;
